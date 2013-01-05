@@ -1,0 +1,209 @@
+/* 
+    Document   : screen
+    Created on : May 31, 2012, 8:38:30 PM
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+ul{
+    padding: 0;
+    margin: 0 0 20px 0;
+    list-style: none;
+}
+h1, h2{
+ padding: 0;
+ margin: 0 0 20px 0;
+ font-weight: normal;
+}
+p{
+   padding: 0;
+   margin: 0 0 20px 0;
+}
+a:link, a:visited{
+    text-decoration: underline;
+    color: #000;
+   
+}
+.menu, a:hover{
+font-weight:bold;
+}
+a:hover{
+    text-decoration: none;
+    
+}
+ul li{
+    padding: 5px 0;
+}
+ul li input[type="text"], ul li input[type="password"]{
+    width: 200px;
+}
+/*Headers*/
+h1{
+    font-size: 1.8em;
+}
+h2{
+    font-size: 1.4em;
+}
+.logo{
+    background-image:url('cresent logo.jpg');
+    margin: 0 0 1px 0;
+    width: 960px;
+    height: 110px;
+    border-radius: 5px 5px 5px 5px;
+   
+}
+body{
+    background-image:url('');
+    font-family: Arial;
+    font-size: 0.8em;
+}
+#container,footer{
+    background: #fff;
+    width: 920px;
+    margin: 0 auto;
+    padding: 20px;
+}
+header{
+    width: 960px;
+    padding: 1px;
+    margin: 0 auto 0 auto;
+}
+#container{
+    min-height: 520px;        
+    border-radius: 5px 5px 0 0;
+}
+footer{
+    border-radius: 0 0 5px 5px;
+}
+.widget{
+    margin-bottom: 40px;
+    background-color: #6699CC;
+    
+    
+}
+.widget h2{
+    margin: 3px 0 5px 0;
+    padding: 0 5px;
+    font-weight: normal;
+    border-bottom: 2px solid #ddd;
+}
+.widget .inner{
+    margin: 10px;
+   
+}
+/*navigation*/
+nav{
+    float: left;
+     width: 960px;
+     height: 40px;
+    background-image:url(menu.jpg);
+     border-radius: 5px 5px 5px 5px;
+}
+nav ul{
+    margin-top:  10px;
+    margin-left: 10px;
+}
+nav ul li{
+    display: inline;
+    margin-right: 10px;
+}
+nav ul li a{
+    text-decoration: none;
+}
+nav ul li.current{
+    font-weight: bold;
+}
+nav ul li.last{
+    border-right: 0;
+}
+/*Aside*/
+aside{
+    width: 260px;
+    float: right;
+    border-left: 1px dashed #aaa;
+    padding-left: 15px;
+    background: #6699CC;
+    border-radius: 5px 5px 5px 5px;
+    margin-left: 10px;
+}
+#login li.link{
+    margin-top: 5px;
+}
+/*footer*/
+footer{
+    border-top:1px dashed #ddd;
+    color: #999;
+}
+/*misc*/
+.clear{
+    clear: both;
+}
+
+
+#signup_form {
+	margin-left: auto;
+	margin-right: auto;
+	width: 360px;
+	
+	font-size: 16px;
+	
+
+}
+
+#signup_form .heading {
+	text-align: center;
+	font-size: 22px;
+	font-weight: bold;
+	color: #B9AA81;
+}
+
+#signup_form form {
+	
+	background-color: #B9AA81;
+	padding: 10px;
+
+	
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+
+}
+
+
+
+#signup_form form label {
+	font-weight: bold;
+	color: #11151E;
+}
+
+#signup_form form input[type=text],input[type=password] {
+	width: 316px;
+	font-weight: bold;
+	padding: 8px;
+	
+	
+	border: 1px solid #FFF;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+#signup_form form input[type=submit] {
+	display: block;
+	margin: auto;
+	width: 200px;
+	font-size: 18px;
+	background-color: #FFF;
+	border: 1px solid #BBB;
+
+}
+
+#signup_form form input[type=submit]:hover {
+	border-color: #000;
+}
+
+#signup_form .error {
+	font-size: 13px;
+	color: #690C07;
+	font-style: italic;
+}

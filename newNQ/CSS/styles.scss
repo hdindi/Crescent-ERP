@@ -1,0 +1,18 @@
+@import 'stylesheets/reset.css';
+@import 'stylesheets/demo.css';
+@import 'stylesheets/less/grid.less';
+
+// Specify the number of columns and set column and gutter widths
+$columns: 12;
+$column-width: 60;
+$gutter-width: 20;
+
+$total-width: 100%;
+
+#moh_logo {
+  @include column(6);
+}
+
+#nqcl_logo{
+  @include column(6);
+}
