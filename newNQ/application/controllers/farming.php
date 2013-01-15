@@ -172,5 +172,21 @@ class Farming extends CI_Controller {
     }
 
   }
+
+  function toExcelAll() {
+$query['data1'] = $this->ToExcelAll1();
+$this->load->view('farmview_excel',$query);
+}
+  //query for get all data
+function toExcelAll1() {
+$this->db->select('*');
+$this->db->from('farm');
+$this->db->order_by('id','asc');
+$getData = $this->db->get();
+if($getData->num_rows() > 0)
+return $getData->result_array();
+else
+return null;
+}
 	
 }

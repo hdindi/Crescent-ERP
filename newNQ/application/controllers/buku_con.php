@@ -21,7 +21,7 @@ $this->load->view('excel_view',$query);
 
 function getBuku1() {
 $this->db->select('*');
-$this->db->from('tb_book');
+$this->db->from('farm');
 $this->db->order_by('id','DESC');
 $getData = $this->db->get();
 if($getData->num_rows() > 0)
@@ -32,7 +32,7 @@ return null;
 //query for get all data
 function toExcelAll1() {
 $this->db->select('*');
-$this->db->from('tb_book');
+$this->db->from('farm');
 $this->db->order_by('id','desc');
 $getData = $this->db->get();
 if($getData->num_rows() > 0)

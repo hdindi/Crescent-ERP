@@ -144,7 +144,7 @@ $('#f_state').change(function(){
 
 
 
-       <p> <label for="farmname" >Farm Name:</label> <textarea name="farmname"  id="farmname" placeholder="e.g Buyofu 148" ></textarea>  </p>
+       <p> <label for="farmname" >Farm Name:</label> <input name="farmname"  id="farmname" placeholder="e.g Buyofu 148" >  </p>
 
 
 
@@ -152,63 +152,14 @@ $('#f_state').change(function(){
 
 
       <p> <label for="dateofcontract" >Date of Contract:</label>  <input type="text" name="dateofcontract" placeholder="format:d-M-y" id="dateofcontract"/>  </p>
-
-
-
-      <p> <label for="leasecost"  > Lease cost per acre:</label>  <input type="text" name="leasecost" placeholder=" Number Only " id="leasecost"/> </p>
-
-
-      <p> <label for="soiltype"  > Soil Type:</label>  <input type="text" name="soiltype" placeholder=" e.g Black Cotton Soil " id="soiltype"/> 
-
-
-      <p> <label for="fielddescription"  > Field Description:</label>  <input type="text" name="fielddescription" placeholder="   " id="fielddescription"/ > </p>
+      <p><label> Crop Cycle: </label> <input type="text" name="cropcycle" placeholder="plant crop / ratoon"></p>   
         <p><label for="zones"> Zone</label> <input type="text" name="zone" placeholder="" id="zone"/></p>
-      <p>  <label> Means of Payment: </label> <select name="meansofpayment">
-        <option value=""> --Select Method--</option>
-        <option value="Bank"> Bank </option>
-        <option value="Cash"> Cash</option>
-      </select>  </p>
+  
 
 </fieldset>  
 
-    <fieldset class="weight">
-        <legend></legend><h3>Land Preparation Information  </h3>
         
-       <p> <label for="bushclearing"> Land Clearing( Bush Clearing) Cost:</label>:  <input type="text" placeholder="e.g 1200 per acre( number only)" id="bushclearing" name="bushclearing" /> </p>
-
-        <p><label for="harrowingcost"> Harrowing Cost : </label><input type="text" placeholder="e.g 1200 per acre(number only)" id="harrowingcost"  name="harrowingcost" />  </p>
-
-       <p><label for="ploughingcost"> Ploughing Cost: </label><input type="text" placeholder="e.g 1200 per acre(number only)" id="ploughingcost" name="ploughingcost" />  </p>
-      <p>  <label> Means of Payment: </label> <select name="landpreparationpayment">
-        <option value=""> --Select Method--</option>
-        <option value="Bank"> Bank </option>
-        <option value="Cash"> Cash</option>
-      </select>  </p>
-        </fieldset>
-        
-        <fieldset id="SampleAssay">
-       <legend></legend><h3>Planting Activity Information </h3>
-        
-        <fieldset class="weight">
-        <legend><h4>Planting Actitvity Information</h4></legend>
-        
-        
-
-        <p>
-        <label for ="cropname">Crop name :</label> <input type="text" placeholder="e.g Sugar cane" id="cropname" name="cropname" /> 
-        
-      </p>
-      <p>
-        <label for ="type">Fertilizer name :</label> <input type="text" id="fertilizername" placeholder="e.g Sugar cane" name="fertilizername" /> 
-        
-      </p>
-       <p> <label for ="quantity">  Fertilizer amount : </label> <input type="text" id="quantity" placeholder="e.g 50 kg(integer only)" name="quantity" />
-        
-       </p>
-         
-         <p><label for ="totalseedlingcost"> Total Seedling Cost:</label> <input type="text"  placeholder="e.g 20,000 (number only)" name="totalseedlingcost" />  </p>
-
-         </fieldset>
+       
 
       
         </fieldset>

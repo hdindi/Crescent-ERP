@@ -9,28 +9,42 @@ class Profiles extends CI_Controller {
 
 		//$this->load->model('users');	
 		//$this->load->model('files');
-		$this->load->helper('file');
+		$this->load->helper(array('form','url','file'));
 
 		$this->userid = $this->session->userdata('userid');
 		if (!isset($this->userid) or $this->userid=='') redirect('logins');
 	}
+
+	
 	
 	function index()
 	{
 		$data['files'] = $this->get($this->userid);
-		$this->load->view('profiles', $data);
+		$this->load->view('profiles', $data,array('error' => ' ' ));
+		//$this->load->view('upload_form', array('error' => ' ' ));
 	}
 	
-	function upload()
+	function do_upload()
 	{
 		if(isset($_FILES['file'])){
 			$file 	= read_file($_FILES['file']['tmp_name']);
 			$name 	= basename($_FILES['file']['name']);
 
-			write_file('files/'.$name, $file);
 
-			$this->adds($name);
-			redirect('profiles');		
+
+
+			$config['upload_path'] = './files/';
+		$config['allowed_types'] = 'gif|png|jpg';
+		$config['max_size']	= '100';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+
+
+			//write_file('files/'.$name, $file);
+		$this->adds($name);
+			redirect('profiles');
 		}
 
 		else $this->load->view('uploads');

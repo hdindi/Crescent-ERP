@@ -11,8 +11,9 @@ foreach($detail as $rows) {
 echo "<tr>";
 echo "
 <td>".  $rows['id']."</td>
-<td>". $rows['title'] ."</td>
-<td>". $rows['author'] ."</td>
+<td>". $rows['plotnumber'] ."</td>
+<td>". $rows['farmname'] ."</td>
+<td>". $rows['leasorname']."</td>
 "; } ?>
 </table>
 <?php } ?>

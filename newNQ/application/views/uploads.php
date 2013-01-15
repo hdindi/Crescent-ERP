@@ -11,7 +11,7 @@
 		
 		<img id="logo" src="<?=base_url()?>images/logo.png" /> <h1>: Upload</h1>
 		
-		<form enctype="multipart/form-data" action="<?=site_url('profiles/upload')?>" method="post">
+		<form enctype="multipart/form-data" action="<?=site_url('profiles/do_upload')?>" method="post">
 
 			<div id="boxtop"></div><div id="boxmid">
 

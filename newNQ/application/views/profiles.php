@@ -31,7 +31,7 @@
 	   	<div class="text" style="float: right;">
 
 			<a href="<?=site_url('logins/logout')?>" class="submit red">Logout</a>
-	   		<a href="<?=site_url('profiles/upload')?>" class="submit">Upload</a>
+	   		<a href="<?=site_url('excelupload/do_upload')?>" class="submit">Upload</a>
 		
 	</div>
 	<br style="clear:both; height: 0px;" />

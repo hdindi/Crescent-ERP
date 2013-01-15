@@ -138,6 +138,8 @@ foreach($query as $row){
 ?>
 </tbody>
 </table>
+<br> <br>
+<a href='toExcelAll'><span style='color:green;'>Export All Data</span></a>
 </div>
 
 

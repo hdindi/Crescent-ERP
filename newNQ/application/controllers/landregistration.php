@@ -142,6 +142,8 @@ class Landregistration extends CI_Controller {
             'dateofcontract' => $this->input->post('dateofcontract',true)
         );
         $this->db->insert( 'farm', $data );
+        $id = mysql_insert_id();
+        
         //chemical registration
         $dataa = array(
 			'plotnumber' => $this->input->post('plotnumber',true),
@@ -176,6 +178,9 @@ class Landregistration extends CI_Controller {
 		$this->load->view('submit_success');
 	
 	}
+	public function cropcycle(){
+
+	}
 
 	private function _submit_validate() {
 		
@@ -194,7 +199,7 @@ class Landregistration extends CI_Controller {
 		$this->form_validation->set_rules('dateofcontract', 'Date of Contract ', 
 			'trim|required');
 		
-		$this->form_validation->set_rules('leasecost', ' Lease cost per acre',
+		/*$this->form_validation->set_rules('leasecost', ' Lease cost per acre',
 			'trim|required');
 		
 		/*$this->form_validation->set_rules('landclearing', 'Land Clearing ',

@@ -15,8 +15,9 @@ foreach($data1 as $item) {
 ?>
 <tr>
 <td><?=$item['id']?></td>
-<td><?=$item['title']?></td>
-<td><?=$item['author']?></td>
+<td><?=$item['plotnumber']?></td>
+<td><?=$item['farmname']?></td>
+<td><?=$item['leasorname']?></td>
 </tr>
 <? } ?>
 </table>

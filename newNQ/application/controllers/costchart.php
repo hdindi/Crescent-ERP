@@ -1,5 +1,5 @@
 <?php
-class Fusioncharts extends CI_Controller{
+class Costchart extends CI_Controller{
 	
 	function Fusioncharts(){
 		parent::__construct();
@@ -15,7 +15,7 @@ class Fusioncharts extends CI_Controller{
 
 	public function view(){
 		$strDataURL = base_url() . "fusioncharts/ViewResults/";
-$pie_chart['pie_charts'] = Fusioncharts(base_url() . "Scripts/FusionCharts/Line.swf", $strDataURL, "", "PIE_POLL_RESULTS", 800, 600, false, false,false);
+$pie_chart['pie_charts'] = Fusioncharts(base_url() . "Scripts/FusionCharts/Line.swf", $strDataURL, "", "PIE_POLL_RESULTS", 1000, 800, false, false,false);
 
 
 		$this ->load -> view('chartsview', $pie_chart);
@@ -55,7 +55,7 @@ $pie_chart['pie_charts'] = Fusioncharts(base_url() . "Scripts/FusionCharts/Line.
 
 
 	public function ViewResults() {
-		$strXML = "<chart caption='Number of Acres per Farms'  pieSliceDepth='30' showBorder='0' formatNumberScale='0' showValues='1' showPercentageInLabel='1'  showPercentageValues='1' numberSuffix=' Acres'>";
+		$strXML = "<chart caption='Costs incurred per year'  pieSliceDepth='30' showBorder='0' formatNumberScale='0' showValues='1' showPercentageInLabel='1'  showPercentageValues='1' numberSuffix=' Acres'>";
 		$this -> load -> database();
 		$first_query = $this -> db -> query("SELECT * from transportrevenue");
 		$first_results = $first_query -> result_array();
