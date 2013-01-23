@@ -1,0 +1,7 @@
+<html>
+<?php
+foreach($farms as $farm):
+echo $farm;
+endforeach;
+?>
+</html>
