@@ -456,8 +456,9 @@ and suppliers.supplier_city = 'Atlantic City';");
     function delete($id)
     {
         //This deletes the file from the database, before returning the name of the file.
-        $name = $this->deletes($id);        
-        unlink('./files/'.$name);
+        $name = $this->deletes($id);  
+		$path = "./uploadedfiles/farm/{$name}";      
+        unlink('./uploadedfiles/farm/'.$name);
         redirect('profiles');
     }
 function adds($file)

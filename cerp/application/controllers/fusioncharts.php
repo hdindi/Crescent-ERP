@@ -70,7 +70,7 @@ $pie_chart['pie_charts'] = Fusioncharts(base_url() . "Scripts/FusionCharts/Line.
 				foreach ($second_results as $second_result) {
 
 					if ($second_results) {
-						$strXML .= "<set label='" . $first_result['plotnumber'] . "' value='" . $second_result['Tally'] . "' />";
+						$strXML .= "<set label='" . $first_result['id'] . "' value='" . $second_result['Tally'] . "' />";
 					}
 					if (!$second_results) {
 						echo "No of Acres for " . $first_result['plotnumber//'] . "<br/>";
@@ -80,7 +80,7 @@ $pie_chart['pie_charts'] = Fusioncharts(base_url() . "Scripts/FusionCharts/Line.
 			}
 			$strXML .= "</chart>";
 
-			//header('Content-type: text/xml');
+			header('Content-type: text/xml');
 			echo $strXML;
 		}
 

@@ -28,7 +28,7 @@ public function index() {
                     'dotFiles' => false,
                     'tmbDir' => '_tmb',
                     'arc' => '7za',
-                    'defaults' => array('read' => true, 'write' => false, 'rm' => false)
+                    'defaults' => array('read' => true, 'write' => true, 'rm' => true)
                 ),
             ),
         );
