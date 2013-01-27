@@ -14,7 +14,7 @@
 		<form enctype="multipart/form-data" action="<?=site_url().'fleetrepairsupload/do_upload/'.$fleetrepairs?>" method="post">
 
 			<div id="boxtop"></div><div id="boxmid">
-
+<label> <p> PLEASE UPLOAD FILE WITH THE NAME :  <?php echo($fleetrepairs); ?>  ONLY!</p></label>
 				<div class="section">
 					<span>File:</span>
 					<input type="file" name="userfile" />

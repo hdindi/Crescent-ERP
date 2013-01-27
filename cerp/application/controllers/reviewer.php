@@ -21,8 +21,8 @@ public function index() {
             'roots' => array(
                 array(
                     'driver' => 'LocalFileSystem',
-                    'path' => './files/',
-                    'URL' => base_url() . '/files/',
+                    'path' => './uploadedfiles/',
+                    'URL' => base_url() . '/uploadedfiles/',
                     'accessControl' => 'access',
                     //'disabled' => array('edit', 'rename', 'cut', 'copy','delete','trash'),
                     'dotFiles' => false,

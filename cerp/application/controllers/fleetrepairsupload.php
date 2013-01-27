@@ -1,7 +1,7 @@
 <?php
 //error_reporting(0);
 session_start();
-class Transportupload extends CI_Controller{
+class Fleetrepairsupload extends CI_Controller{
 	private $_variable = "";
 	private $_variable1 = "";
 	private $_variable2 = "";
@@ -28,17 +28,16 @@ class Transportupload extends CI_Controller{
 	//$data['precost1']=$this->cycle();
 	
 
-	$this->load->view('fleetrepair_v',$data);
+	$this->load->view('fleetrepairsupload_v',$data);
 	}
 	
 
 	
 	
 	public function do_upload(){
-	  $driverrenumeration= $this->uri->segment(3);
-	  echo $driverrenumeration;
-	  $cyclename = $this->uri->segment(4);
-	  echo $cyclename;
+	  $fleetrepairs= $this->uri->segment(3);
+	  echo $fleetrepairs;
+	  
 	  
 	 $try = $this->_variable;
 		echo $try;
@@ -236,7 +235,7 @@ class Transportupload extends CI_Controller{
                 1=>array('fleetid'=>$regno,'month'=>$B2,'monthlycost'=>$C34,'year'=>$E2),
                 2=>array('fleetid'=>$regno1,'month'=>$B2,'monthlycost'=>$D34,'year'=>$E2),
                 3=>array('fleetid'=>$regno2,'month'=>$B2,'monthlycost'=>$E34,'year'=>$E2),
-                4=>array('fleetid'=>$regno3,'month'=>$B2,'tonnmonthlycostes'=>$F34,'year'=>$E2),
+                4=>array('fleetid'=>$regno3,'month'=>$B2,'monthlycost'=>$F34,'year'=>$E2),
                 5=>array('fleetid'=>$regno4,'month'=>$B2,'monthlycost'=>$G34,'year'=>$E2),
 				6=>array('fleetid'=>$regno5,'month'=>$B2,'monthlycost'=>$H34,'year'=>$E2),
 			
@@ -262,9 +261,9 @@ class Transportupload extends CI_Controller{
 			
 			
 			
-			$monthly = "INSERT INTO totalmonthlytonnage (month,cost,year) VALUES ('$B2','$L37','$I34')";
+			$monthly = "INSERT INTO totalmonthlyrepairscost (month,cost,year) VALUES ('$B2','$I34','$E2')";
 			$monthlyinsert = mysql_query($monthly);
-			if($month==TRUE){
+			if($monthly==TRUE){
 				echo("DONE");
 			}else{
 				echo mysql_error();
