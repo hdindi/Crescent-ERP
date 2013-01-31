@@ -17,7 +17,7 @@ class Dailycharts extends CI_Controller{
 		$strDataURL = base_url() . "dailycharts/ViewResults/";
 		$piedataURL = base_url(). "dailycharts/piechartviews";
 $column_chart = Fusioncharts(base_url() . "Scripts/FusionCharts/MSColumn3D.swf", $strDataURL, "", "COLUMN_POLL_RESULTS", 500, 500, false, false,false);
-$pie_chart = Fusioncharts(base_url() . "Scripts/FusionCharts/Line.swf", $piedataURL, "", "PIE_POLL_RESULTS", 500, 500, false, false,false);
+$pie_chart = Fusioncharts(base_url() . "Scripts/FusionCharts/Pie3D.swf", $piedataURL, "", "PIE_POLL_RESULTS", 800, 600, false, false,false);
 
 $data['pie_graph'] = $pie_chart;
 $data['column_graph'] = $column_chart;
@@ -87,21 +87,22 @@ $strXML .="</dataset>";
 			public function piechartviews() {
 		$strXML = "<chart caption='Number of Acres per Farms'  pieSliceDepth='30' showBorder='0' formatNumberScale='0' showValues='1' showPercentageInLabel='1'  showPercentageValues='1' numberSuffix=' Acres'>";
 		$this -> load -> database();
-		$first_query = $this -> db -> query("SELECT * from transportrevenue");
+		$first_query = $this -> db -> query("SELECT * from farm");
 		$first_results = $first_query -> result_array();
 		if ($first_results) {
 			$i = 0;
 			foreach ($first_results as $first_result) {
 
-				$second_query = $this -> db -> query("select cummulativeamount as Tally from transportrevenue where cummulativeamount >= '1' and id='".$first_result['id']."'");
+				$second_query = $this -> db -> query("select acre as Tally from farm where acre >= '1' and id='".$first_result['id']."'");
 				$second_results = $second_query -> result_array();
 				//echo($second_query);
 
 				foreach ($second_results as $second_result) {
 
 					if ($second_results) {
-						$strXML .= "<set label='" . $first_result['id'] . "' value='" . $second_result['Tally'] . "' />";
-					}
+						$strXML .= "<set label='" . $first_result['name'] . "' value='" . $second_result['Tally'] . "' />";
+			
+                                                }
 					if (!$second_results) {
 						echo "No of Acres for " . $first_result['plotnumber//'] . "<br/>";
 					}

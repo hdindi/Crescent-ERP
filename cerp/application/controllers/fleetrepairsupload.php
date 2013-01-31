@@ -227,7 +227,8 @@ class Fleetrepairsupload extends CI_Controller{
             $F34 = $objPHPExcel->getActiveSheet()->getCell('F34') ->getCalculatedValue();
             $G34 = $objPHPExcel->getActiveSheet()->getCell('G34')->getCalculatedValue();
             $H34 = $objPHPExcel->getActiveSheet()->getCell('H34')->getCalculatedValue();
-           
+           		//TOTAL MONTHLY TONNAGE
+            $I34 = $objPHPExcel->getActiveSheet()->getCell('I34')->getCalculatedValue();
             
 			
 			
@@ -241,7 +242,19 @@ class Fleetrepairsupload extends CI_Controller{
 			
                
                 );
-            foreach ($chemicalarray as $key) {
+            
+			
+			$filename = $this->checkfile();
+            $owner = $this->checkowner();
+            $userid = $this->session->userdata('userid');
+			
+			$file   = read_file($_FILES['userfile']['tmp_name']);
+            $name   = basename($_FILES['userfile']['name']);
+            $userid =  $this->session->userdata('userid');
+            
+           if ($name !== $filename ) {
+               
+               foreach ($chemicalarray as $key) {
                 # code...
                 $unitsql = "INSERT INTO repairs (fleetid,month,monthlycost,year)
                 value
@@ -253,14 +266,9 @@ class Fleetrepairsupload extends CI_Controller{
                     echo mysql_error();
                 }
             }
-			
-			//TOTAL MONTHLY TONNAGE
-            $I34 = $objPHPExcel->getActiveSheet()->getCell('I34')->getCalculatedValue();
-			 //$this->db ->query("INSERT INTO mo (cummulativeamount) VALUES ('$sum')");
-			
-			
-			
-			
+               
+               
+               
 			$monthly = "INSERT INTO totalmonthlyrepairscost (month,cost,year) VALUES ('$B2','$I34','$E2')";
 			$monthlyinsert = mysql_query($monthly);
 			if($monthly==TRUE){
@@ -274,29 +282,98 @@ class Fleetrepairsupload extends CI_Controller{
 			$yearly = "INSERT INTO yearlytonnage (year,tonnage) VALUES(),()";
 			$yearlyinsert = mysql_query($yearly);
 			
-			
-			
-			$filename = $this->checkfile();
-            $owner = $this->checkowner();
-            $userid = $this->session->userdata('userid');
-			
-			$file   = read_file($_FILES['userfile']['tmp_name']);
-            $name   = basename($_FILES['userfile']['name']);
-            $userid =  $this->session->userdata('userid');
-            
-           if ($name !== $filename ) {
+               
+               
+               
            
                     $file   = read_file($_FILES['userfile']['tmp_name']);
                     $name   = basename($_FILES['userfile']['name']);
                     $userid =  $this->session->userdata('userid');
 
             $this->adds($name);
-            // redirect('profiles');
+             redirect('profiles');
        
             }
            
             elseif ($name == $filename ) {
+                
+                
+                $this->db->select('month');
+             $this->db->select('year');
+		$this->db->from('repairs');
+		$this->db->where('month', $B2);
+		$this->db->where('year',$E2);
+		$this->db->limit(1);
+		$query_id = $this->db->get();
+		if ($query_id -> num_rows() > 0){
+		$query_row = $query->result();
+			foreach ($query_id->result() as $row){
+			$month = $row->month;
+                        $year = $row->year;
+			echo $month.'<br/>';
+                        echo $year.'<br/>';
+			}
+			
+		}
+                echo $month.'<br/>';
+                echo $year.'<br/>';
+                
+                if($month ===$B2 && $year === $E2){
+                    
+                         $unitsql = "DELETE FROM repiars
+WHERE month='$B2' AND year='$E2'";    
+                $q = mysql_query($unitsql);
+                 foreach ($chemicalarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO repairs (fleetid,month,monthlycost,year)
+                value
+                ('{$key['fleetid']}','{$key['month']}','{$key['monthlycost']}','{$key['year']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+            $this->db ->query("UPDATE totalmonthlyrepairscost SET cost = '$I34' WHERE year = '$B2 ' AND month = '$E2'");
+                
+               redirect('profiles');
+                }
+                elseif ($month !== $B2 && $year !== $E2) {
+                    
+                  foreach ($chemicalarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO repairs (fleetid,month,monthlycost,year)
+                value
+                ('{$key['fleetid']}','{$key['month']}','{$key['monthlycost']}','{$key['year']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
                
+               
+               
+			$monthly = "INSERT INTO totalmonthlyrepairscost (month,cost,year) VALUES ('$B2','$I34','$E2')";
+			$monthlyinsert = mysql_query($monthly);
+			if($monthly==TRUE){
+				echo("DONE");
+			}else{
+				echo mysql_error();
+			}
+			
+			
+			
+			$yearly = "INSERT INTO yearlytonnage (year,tonnage) VALUES(),()";
+			$yearlyinsert = mysql_query($yearly);
+			
+                        redirect('profiles');
+                  
+                
+            }
+                
                //redirect('profiles');
       
           

@@ -270,8 +270,7 @@ and suppliers.supplier_city = 'Atlantic City';");
                                         );
             $sum = array_sum($multplicationarray);
             
-             $this->db ->query("INSERT INTO transportrevenue (cummulativeamount) VALUES ('$sum')");
-			
+             	
            
             echo array_sum($multplicationarray).'<br/>';
 			echo "kenya";
@@ -346,23 +345,33 @@ and suppliers.supplier_city = 'Atlantic City';");
 			$E46 = $objPHPExcel->getActiveSheet()->getCell('E46') ->getCalculatedValue();
             $E47 = $objPHPExcel->getActiveSheet()->getCell('E47') ->getCalculatedValue();
             $E48 = $objPHPExcel->getActiveSheet()->getCell('E48')->getCalculatedValue();
-           
+            $E4 = $objPHPExcel->getActiveSheet()->getCell('E4') ->getCalculatedValue();
+            $E5 = $objPHPExcel->getActiveSheet()->getCell('E5')->getCalculatedValue();
+            
             
 			
 			
             $chemicalarray = array(
-                1=>array('name'=>$B41,'farmid'=>$farmname_id,'amount'=>$D41,'cycleid'=>$cycleid,'totalprice'=>$E41,'quantity'=>$C41),
-                2=>array('name'=>$B42,'farmid'=>$farmname_id,'amount'=>$D42,'cycleid'=>$cycleid,'totalprice'=>$E42,'quantity'=>$C42),
-                3=>array('name'=>$B43,'farmid'=>$farmname_id,'amount'=>$D43,'cycleid'=>$cycleid,'totalprice'=>$E43,'quantity'=>$C43),
-                4=>array('name'=>$B44,'farmid'=>$farmname_id,'amount'=>$D44,'cycleid'=>$cycleid,'totalprice'=>$E44,'quantity'=>$C44),
-                5=>array('name'=>$B45,'farmid'=>$farmname_id,'amount'=>$D45,'cycleid'=>$cycleid,'totalprice'=>$E45,'quantity'=>$C45),
-                6=>array('name'=>$B46,'farmid'=>$farmname_id,'amount'=>$D46,'cycleid'=>$cycleid,'totalprice'=>$E46,'quantity'=>$C46),
-                7=>array('name'=>$B47,'farmid'=>$farmname_id,'amount'=>$D47,'cycleid'=>$cycleid,'totalprice'=>$E47,'quantity'=>$C47),
-                8=>array('name'=>$B48,'farmid'=>$farmname_id,'amount'=>$D48,'cycleid'=>$cycleid,'totalprice'=>$E48,'quantity'=>$C48),
+                1=>array('name'=>$B41,'farmid'=>$farmname_id,'amount'=>$D41,'cycleid'=>$cycleid,'totalprice'=>$E41,'quantity'=>$C41,'year'=>$E4,'month'=>$E5),
+                2=>array('name'=>$B42,'farmid'=>$farmname_id,'amount'=>$D42,'cycleid'=>$cycleid,'totalprice'=>$E42,'quantity'=>$C42,'year'=>$E4,'month'=>$E5),
+                3=>array('name'=>$B43,'farmid'=>$farmname_id,'amount'=>$D43,'cycleid'=>$cycleid,'totalprice'=>$E43,'quantity'=>$C43,'year'=>$E4,'month'=>$E5),
+                4=>array('name'=>$B44,'farmid'=>$farmname_id,'amount'=>$D44,'cycleid'=>$cycleid,'totalprice'=>$E44,'quantity'=>$C44,'year'=>$E4,'month'=>$E5),
+                5=>array('name'=>$B45,'farmid'=>$farmname_id,'amount'=>$D45,'cycleid'=>$cycleid,'totalprice'=>$E45,'quantity'=>$C45,'year'=>$E4,'month'=>$E5),
+              );
                 
-               
-                );
-            foreach ($chemicalarray as $key) {
+            
+			$filename = $this->checkfile();
+            $owner = $this->checkowner();
+            $userid = $this->session->userdata('userid');
+			
+			$file   = read_file($_FILES['userfile']['tmp_name']);
+            $name   = basename($_FILES['userfile']['name']);
+            $userid =  $this->session->userdata('userid');
+            
+           if ($name !== $filename ) {
+               $this->db ->query("INSERT INTO transportrevenue (cummulativeamount) VALUES ('$sum')");
+		
+               foreach ($chemicalarray as $key) {
                 # code...
                 $unitsql = "INSERT INTO chemical (name,farmid,amount,cycleid,totalprice,quantity)
                 value
@@ -375,15 +384,7 @@ and suppliers.supplier_city = 'Atlantic City';");
                 }
             }
             
-			$filename = $this->checkfile();
-            $owner = $this->checkowner();
-            $userid = $this->session->userdata('userid');
-			
-			$file   = read_file($_FILES['userfile']['tmp_name']);
-            $name   = basename($_FILES['userfile']['name']);
-            $userid =  $this->session->userdata('userid');
-            
-           if ($name !== $filename ) {
+               
            
                     $file   = read_file($_FILES['userfile']['tmp_name']);
                     $name   = basename($_FILES['userfile']['name']);
@@ -394,9 +395,85 @@ and suppliers.supplier_city = 'Atlantic City';");
        
             }
            
-            elseif ($name == $filename ) {
-               
+         elseif ($name == $filename ) {
+             $this->db->select('month');
+             $this->db->select('year');
+		$this->db->from('chemical');
+		$this->db->where('month', $E5);
+		$this->db->where('year',$E4);
+		$this->db->limit(1);
+		$query_id = $this->db->get();
+		if ($query_id -> num_rows() > 0){
+		$query_row = $query->result();
+			foreach ($query_id->result() as $row){
+			$month = $row->month;
+                        $year = $row->year;
+			
+			}
+			
+		}
+                
+                if($month === $E5 && $year === $E4){
+                    
+                    
+                    
+                    
+                $this->db ->query("UPDATE transportrevenue SET cummulativeamount = '$sum' WHERE year = '$E4 ' AND month = '$E5' AND farmid ='$farmname_id' AND cycleid = '$cycleid'");
+                
+                var_dump($chemicalarray);
+              
+               //$unitsql = "UPDATE chemical SET name = '{$key['name']}',   amount = '{$key['amount']}' , cycleid = '{$key['cycleid']}' , totalprice = '{$key['totalprice']}', quantity = '{$key['quantity']}' WHERE year = '{$key['year']}' AND month = '{$key['month']}' AND farmid = '{$key['farmid']}' AND chemical.id = '{$key['id']}' ";
+                $unitsql = "DELETE FROM chemical
+WHERE month='$E5' AND year='$E4' AND farmid='$farmname_id' AND cycleid='$cycleid'";    
+                $q = mysql_query($unitsql);
+                
+                
+                
+                if($q==true){
+                   
+                     foreach ($chemicalarray as $key) {
+                # code...
+                
+                $unitsql = "INSERT INTO chemical (name,farmid,amount,cycleid,totalprice,quantity,year,month)
+                value
+                ('{$key['name']}','{$key['farmid']}','{$key['amount']}','{$key['cycleid']}','{$key['totalprice']}','{$key['quantity']}','{$key['year']}','{$key['month']}')";
+                $q = mysql_query($unitsql);
+                echo '4';
+                if($q==true){
+                    
+                    
+                }else{
+                    
+                    echo mysql_error();
+                   
+                }
+            }
+                }else{
+                    echo mysql_error();
+                    
+                }
+           
                redirect('profiles');
+                    
+                } elseif ($month !== $E5 && $year !== $E4) {
+                    $this->db ->query("INSERT INTO transportrevenue (cummulativeamount) VALUES ('$sum')");
+		
+                    foreach ($chemicalarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO chemical (name,farmid,amount,cycleid,totalprice,quantity)
+                value
+                ('{$key['name']}','{$key['farmid']}','{$key['amount']}','{$key['cycleid']}','{$key['totalprice']}','{$key['quantity']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+            redirect('profiles');
+                
+            }
+                
       
           
         }
@@ -407,7 +484,7 @@ and suppliers.supplier_city = 'Atlantic City';");
 		$cropcycle = $this->uri->segment(4);	
 		echo "Wrong file please upload right file with the name:".$farmname.".xlsx";
 		header("Refresh:5;" .base_url()."uploads/do_upload/".$farmname."/".$cropcycle);
-		//header("Refresh:3;" .base_url()."uploads/do_upload/".$farmname);
+		
 			
 		}
 		} else {

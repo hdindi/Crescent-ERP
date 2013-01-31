@@ -5,6 +5,7 @@ class Transportchart extends CI_Controller{
 		parent::__construct();
 		$this -> load -> helper('fusioncharts');
 		//$this->load->view('fussioncharts_view');
+		
         $pie_chart=array();
 
 	}

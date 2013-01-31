@@ -189,7 +189,7 @@
             $sum = array_sum($multplicationarray);
             $data = array( "cummulativeamount"=>$this->$sum
             	);
-            $this->db ->insert('transportrevenue' $data);
+            $this->db ->insert('transportrevenue', $data);
             $this->db ->query("INSERT INTO transportrevenue (cummulativeamount) VALUES ('$sum')");
            
             //echo($sum);

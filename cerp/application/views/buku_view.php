@@ -3,16 +3,17 @@
 <table border="1">
 <tr>
 <th>ID</th>
-<th>Title</th>
-<th>Author</th>
+<th>Date of Contract</th>
+<th>Farm Name</th>
+<th>Leasor Name</th>
 </tr>
 <?php
 foreach($detail as $rows) {
 echo "<tr>";
 echo "
 <td>".  $rows['id']."</td>
-<td>". $rows['plotnumber'] ."</td>
-<td>". $rows['farmname'] ."</td>
+<td>". $rows['dateofcontract'] ."</td>
+<td>". $rows['name'] ."</td>
 <td>". $rows['leasorname']."</td>
 "; } ?>
 </table>

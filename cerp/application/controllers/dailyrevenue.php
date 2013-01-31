@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 session_start();
 class Dailyrevenue extends CI_Controller{
 	private $_variable = "";
@@ -14,6 +14,7 @@ class Dailyrevenue extends CI_Controller{
 		$farmname= $this->uri->segment(3);
 		$cycle = $this->uri->segment(4);
 		
+		
 	}
 	
 	
@@ -25,7 +26,7 @@ class Dailyrevenue extends CI_Controller{
 	
 	public function do_upload(){
 	  $dailyrevenuename= $this->uri->segment(3);
-	  echo $dailyrevenuename;
+	 // echo $dailyrevenuename;
 	  
 	  
 	 $try = $this->_variable;
@@ -103,6 +104,8 @@ class Dailyrevenue extends CI_Controller{
             $M21 = $objPHPExcel->getActiveSheet()->getCell('M21') ->getCalculatedValue();
             $O21 = $objPHPExcel->getActiveSheet()->getCell('O21')->getCalculatedValue();
             $Q21 = $objPHPExcel->getActiveSheet()->getCell('Q21') ->getCalculatedValue();
+            $A3 = $objPHPExcel->getActiveSheet()->getCell('A3')->getCalculatedValue();
+            $S3 = $objPHPExcel->getActiveSheet()->getCell('S3') ->getCalculatedValue();
            
             echo $D10.'<br/>';
 
@@ -121,13 +124,13 @@ class Dailyrevenue extends CI_Controller{
 			
 			
       $unitarray = array(
-                1=>array('zoneid'=>$id1,'tonnes'=>$E21,'date'=>$date),
-                2=>array('zoneid'=>$id2,'tonnes'=>$G21,'date'=>$date),
-                3=>array('zoneid'=>$id3,'tonnes'=>$I21,'date'=>$date),
-                4=>array('zoneid'=>$id4,'tonnes'=>$K21,'date'=>$date),
-                5=>array('zoneid'=>$id5,'tonnes'=>$M21,'date'=>$date),
-                6=>array('zoneid'=>$id6,'tonnes'=>$O21,'date'=>$date),
-                7=>array('zoneid'=>$id7,'tonnes'=>$Q21,'date'=>$date)
+                1=>array('zoneid'=>$id1,'tonnes'=>$E21,'date'=>$date,'period'=>$A3,'month'=>$S3),
+                2=>array('zoneid'=>$id2,'tonnes'=>$G21,'date'=>$date,'period'=>$A3,'month'=>$S3),
+                3=>array('zoneid'=>$id3,'tonnes'=>$I21,'date'=>$date,'period'=>$A3,'month'=>$S3),
+                4=>array('zoneid'=>$id4,'tonnes'=>$K21,'date'=>$date,'period'=>$A3,'month'=>$S3),
+                5=>array('zoneid'=>$id5,'tonnes'=>$M21,'date'=>$date,'period'=>$A3,'month'=>$S3),
+                6=>array('zoneid'=>$id6,'tonnes'=>$O21,'date'=>$date,'period'=>$A3,'month'=>$S3),
+                7=>array('zoneid'=>$id7,'tonnes'=>$Q21,'date'=>$date,'period'=>$A3,'month'=>$S3)
                 );
 			
 				var_dump($unitarray);
@@ -135,9 +138,9 @@ class Dailyrevenue extends CI_Controller{
 				
             foreach ($unitarray as $key) {
                 # code...
-                $unitsql = "INSERT INTO tonnage (zoneid,tonnes,date)
+                $unitsql = "INSERT INTO tonnage (zoneid,tonnes,date,period,month)
                 value
-                ('{$key['zoneid']}','{$key['tonnes']}','{$key['date']}')";
+                ('{$key['zoneid']}','{$key['tonnes']}','{$key['date']}','{$key['period']}','{$key['month']}')";
                 $q = mysql_query($unitsql);
                 if($q==true){
                     echo 'Done';
@@ -195,6 +198,24 @@ class Dailyrevenue extends CI_Controller{
             $userid =  $this->session->userdata('userid');
             
            if ($name !== $filename ) {
+            
+                 foreach ($unitarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO tonnage (zoneid,tonnes,date,period,month)
+                value
+                ('{$key['zoneid']}','{$key['tonnes']}','{$key['date']}','{$key['period']}','{$key['month']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+               
+               
+               
+               
+             
            
                     $file   = read_file($_FILES['userfile']['tmp_name']);
                     $name   = basename($_FILES['userfile']['name']);
@@ -207,6 +228,68 @@ class Dailyrevenue extends CI_Controller{
            
             elseif ($name == $filename ) {
                
+                   
+                $this->db->select('perod');
+                $this->db->select('month');
+                $this->db->from('tonnage');
+		$this->db->where('month', $S3);
+                $this->db->where('period',$A3);
+		//$this->db->where('year',$E2);
+		$this->db->limit(1);
+		$query_id = $this->db->get();
+		if ($query_id -> num_rows() > 0){
+		$query_row = $query->result();
+			foreach ($query_id->result() as $row){
+			$month = $row->month;
+                        
+                        echo $month.'<br/>';
+			}
+			
+		}
+                echo $month.'<br/>';
+                
+                if($month == $S3){
+                    
+                    
+                    $unitsql = "DELETE FROM repiars
+WHERE month='$S3' AND period='$A3'";    
+                $q = mysql_query($unitsql);
+                
+                foreach ($unitarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO tonnage (zoneid,tonnes,date,period,month)
+                value
+                ('{$key['zoneid']}','{$key['tonnes']}','{$key['date']}','{$key['period']}','{$key['month']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+            
+             //$this->db ->query("UPDATE totalmonthlyrepairscost SET cost = '$I34' WHERE year = '$B2 ' AND month = '$E2'");
+           
+                redirect('profiles');
+                    
+                } elseif ($date1 !== $date) {
+                    
+                  foreach ($unitarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO tonnage (zoneid,tonnes,date,period,month)
+                value
+                ('{$key['zoneid']}','{$key['tonnes']}','{$key['date']}','{$key['period']}','{$key['month']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+            redirect('profiles');
+                    
+                }
+                
                redirect('profiles');
       
           

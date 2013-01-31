@@ -58,11 +58,16 @@ setInterval(function() {
       
     
     </h4>
-             <nav>
+                 <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
+        <li><?php echo anchor('farming/landregistration',' Land Registration '); ?></li>
+        <li><?php echo anchor('farming/transport',' Transport Services '); ?></li>
+        <li><?php echo anchor('farming/reports',' View Reports '); ?></li>
+        <li><?php echo anchor('farming/getallfarms','View Leased Farms'); ?></li>
         
       </ul>
+
 </nav>
 <div class="clear"></div>
         </header>
@@ -80,8 +85,8 @@ setInterval(function() {
 		<h2>Hello <em><?php echo Current_User::user()->username; ?></em>.</h2>
 		<h2><?php echo anchor('index.php/logout','Logout'); ?></h2>
 		<h2 id="landregistration" name="landregistration" class="landregistration"><?php echo anchor('landregistration','Land Registration'); ?></h2>
-		<h2><?php echo anchor('weeding','Weeding'); ?></h2>
-		<h2><?php echo anchor('farms/get_All','View Leased Farms'); ?></h2>
+		<h2><?php echo anchor('plots','File Uploads'); ?></h2>
+		<h2><?php echo anchor('farming/getallfarms','View Leased Farms'); ?></h2>
     
 	<?php else: ?>
 	<h2>Login/Register</h2>

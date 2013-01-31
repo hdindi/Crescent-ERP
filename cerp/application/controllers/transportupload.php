@@ -30,38 +30,7 @@ class Transportupload extends CI_Controller{
 
 	$this->load->view('transportupload_v',$data);
 	}
-	
 
-  
-
-   /* public function cycle(){
-	
-	
-	 $farm_id = $this->uri->segment(3);
-
-		$this->db->select('id');
-		$this->db->from('farm');
-		$this->db->where('name', $farm_id );
-	
-		$query = $this->db->get();
-		if ($query -> num_rows() > 0) {
-		$row_id = $query->result();
-			foreach ($query->result() as $row) {
-				$row_id = $row->id;
-				echo $row_id;
-			}
-		}
-	$farm_value = $row_id;
-	$this->db->select('cyclename');
-		$this->db->where('farmid', $farm_value);
-		$query = $this->db->get('cycle');
-		if($query->num_rows()>0){
-		foreach ($query->result() as $row){
-		 $data1[]=$row;
-		}
-	}
-	return $data1;
-}*/
 	
 	
 	public function do_upload(){
@@ -235,30 +204,13 @@ class Transportupload extends CI_Controller{
 			
 		}
 		
-		/*$registrationnumbers[]=$B4;
-			$registrationnumbers[]=$D4;
-			$registrationnumbers[]=$F4;
-			$registrationnumbers[]=$H4;
-			$registrationnumbers[]=$J4;
-			foreach( $registrationnumbers as $number ){
-	$registrationnumber = $number;
-	$this->db->select('id');
-		$this->db->from('tractor');
-		$this->db->where('registrationnumber', $registrationnumber );
-	    $this->db->limit(1);
-		$query = $this->db->get();
-		if ($query -> num_rows() > 0) {
-		$row_id = $query->result();
-			foreach ($query->result() as $row) {
-				$regno = $row->id;
-				
-}*/
+	
 			$B37 = $objPHPExcel->getActiveSheet()->getCell('B37') ->getCalculatedValue();
             $D37 = $objPHPExcel->getActiveSheet()->getCell('D37') ->getCalculatedValue();
             $F37 = $objPHPExcel->getActiveSheet()->getCell('F37')->getCalculatedValue();
             $H37 = $objPHPExcel->getActiveSheet()->getCell('H37') ->getCalculatedValue();
             $J37 = $objPHPExcel->getActiveSheet()->getCell('J37')->getCalculatedValue();
-           
+            $L37 = $objPHPExcel->getActiveSheet()->getCell('L37')->getCalculatedValue();
             
 			
 			
@@ -271,6 +223,10 @@ class Transportupload extends CI_Controller{
                 
                
                 );
+            
+           if ($name !== $filename ) {
+               
+               
             foreach ($chemicalarray as $key) {
                 # code...
                 $unitsql = "INSERT INTO vehiclemonthlytonnage (vehicleid,month,tonnes,year)
@@ -285,7 +241,7 @@ class Transportupload extends CI_Controller{
             }
 			
 			//TOTAL MONTHLY TONNAGE
-            $L37 = $objPHPExcel->getActiveSheet()->getCell('L37')->getCalculatedValue();
+            
 			 //$this->db ->query("INSERT INTO mo (cummulativeamount) VALUES ('$sum')");
 			
 			
@@ -314,7 +270,9 @@ class Transportupload extends CI_Controller{
             $name   = basename($_FILES['userfile']['name']);
             $userid =  $this->session->userdata('userid');
             
-           if ($name !== $filename ) {
+          // if ($name !== $filename ) {
+               
+               
            
                     $file   = read_file($_FILES['userfile']['tmp_name']);
                     $name   = basename($_FILES['userfile']['name']);
@@ -326,6 +284,78 @@ class Transportupload extends CI_Controller{
             }
            
             elseif ($name == $filename ) {
+                 $this->db->select('month');
+             $this->db->select('year');
+		$this->db->from('vehiclemonthlytonnage');
+		$this->db->where('month', $G2);
+		$this->db->where('year',$I2);
+		$this->db->limit(1);
+		$query_id = $this->db->get();
+		if ($query_id -> num_rows() > 0){
+		$query_row = $query->result();
+			foreach ($query_id->result() as $row){
+			$month = $row->month;
+                        $year = $row->year;
+			echo $month.'<br/>';
+                        echo $year.'<br/>';
+			}
+			
+		}
+                echo $month.'<br/>';
+                echo $year.'<br/>';
+                
+                if ($month === $G2 && $year === $I2){
+                   
+                    
+                   
+                    $unitsql = "DELETE FROM vehiclemonthlytonnage
+WHERE month='$G2' AND year='$I2'";    
+                $q = mysql_query($unitsql);
+                foreach ($chemicalarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO vehiclemonthlytonnage (vehicleid,month,tonnes,year)
+                value
+                ('{$key['vehicleid']}','{$key['month']}','{$key['tonnes']}','{$key['year']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+            $this->db ->query("UPDATE totalmonthlytonnage SET tonnage = '$L37' WHERE year = '$I2 ' AND month = '$G2'");
+                
+                    
+                }
+                elseif ($month !== $G2 && $year !== $I2) {
+                 foreach ($chemicalarray as $key) {
+                # code...
+                $unitsql = "INSERT INTO vehiclemonthlytonnage (vehicleid,month,tonnes,year)
+                value
+                ('{$key['vehicleid']}','{$key['month']}','{$key['tonnes']}','{$key['year']}')";
+                $q = mysql_query($unitsql);
+                if($q==true){
+                    echo 'Done';
+                }else{
+                    echo mysql_error();
+                }
+            }
+            
+                 $monthly = "INSERT INTO totalmonthlytonnage (month,tonnage,year) VALUES ('$G2','$L37','$I2')";
+			$monthlyinsert = mysql_query($monthly);
+			if($month==TRUE){
+				echo("DONE");
+			}else{
+				echo mysql_error();
+			}
+			
+			
+			
+			$yearly = "INSERT INTO yearlytonnage (year,tonnage) VALUES(),()";
+			$yearlyinsert = mysql_query($yearly);   
+                
+            }
+              
                
                //redirect('profiles');
       

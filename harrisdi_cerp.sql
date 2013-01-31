@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2013 at 08:58 PM
+-- Generation Time: Jan 27, 2013 at 09:19 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -687,12 +687,12 @@ CREATE TABLE IF NOT EXISTS `farm` (
 --
 
 INSERT INTO `farm` (`id`, `name`, `acre`, `zone`, `dateofcontract`, `leasorname`) VALUES
-(1, 'AMUKURA_84', 12, 'TESO', '11-24-2012', 'wer'),
-(2, 'AMUKURA_154', 12, 'Teso', '12-12-2012', 'khjgfd'),
-(3, 'AMUKURA_140', 55, 'Teso', '12-12-2012', 'XYZ'),
-(4, 'KWANGMOR_229', 25, 'Teso', '11-24-2012', 'XYZ'),
-(5, 'NASIRA_111', 12, 'Busia', '11-24-2012', 'XYZ'),
-(6, 'BUSIBWABO_112', 6, 'Buyofu', '11-24-2012', 'XYZ');
+(1, 'AMUKURA_84', 12, 'TESO', '11242012', 'wer'),
+(2, 'AMUKURA_154', 12, 'Teso', '12122012', 'khjgfd'),
+(3, 'AMUKURA_140', 55, 'Teso', '12122012', 'XYZ'),
+(4, 'KWANGMOR_229', 25, 'Teso', '11242012', 'XYZ'),
+(5, 'NASIRA_111', 12, 'Busia', '11242012', 'XYZ'),
+(6, 'BUSIBWABO_112', 6, 'Buyofu', '11242012', 'XYZ');
 
 -- --------------------------------------------------------
 
@@ -727,7 +727,7 @@ CREATE TABLE IF NOT EXISTS `files` (
   `owner` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `files`
@@ -772,7 +772,13 @@ INSERT INTO `files` (`id`, `username`, `password`, `owner`, `name`) VALUES
 (41, NULL, NULL, '10', 'DRIVER_RENUMERATION_DECEMBER_2012.xlsx'),
 (42, NULL, NULL, '10', 'DRIVER_RENUMERATION_DECEMBER_2012.xlsx'),
 (43, NULL, NULL, '10', 'DRIVER_RENUMERATION_DECEMBER_2012.xlsx'),
-(44, NULL, NULL, '10', 'DRIVER_RENUMERATION_DECEMBER_2012.xlsx');
+(44, NULL, NULL, '10', 'DRIVER_RENUMERATION_DECEMBER_2012.xlsx'),
+(45, NULL, NULL, '10', 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012.xlsx'),
+(46, NULL, NULL, '10', 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012.xlsx'),
+(47, NULL, NULL, '10', 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012.xlsx'),
+(48, NULL, NULL, '10', 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012.xlsx'),
+(49, NULL, NULL, '10', 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012.xlsx'),
+(50, NULL, NULL, '10', 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012.xlsx');
 
 -- --------------------------------------------------------
 
@@ -788,12 +794,19 @@ CREATE TABLE IF NOT EXISTS `fleet` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `regno` (`regno`),
   UNIQUE KEY `chasisno` (`chasisno`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `fleet`
 --
 
+INSERT INTO `fleet` (`id`, `type`, `regno`, `chasisno`) VALUES
+(1, 'ISUZU FVR', 'KAC315', '124534321'),
+(2, 'ISUZU FVR', 'KAE943', '654231'),
+(3, 'TS90', 'KTCA069', '653423'),
+(4, 'TS90', 'KTCA164', '65342'),
+(5, 'TS90', 'KTCA560', '65423'),
+(6, 'TS90', 'KBB981', '76534');
 
 -- --------------------------------------------------------
 
@@ -805,12 +818,15 @@ CREATE TABLE IF NOT EXISTS `fleetrepairs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fleetrepairs` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `fleetrepairs`
 --
 
+INSERT INTO `fleetrepairs` (`id`, `fleetrepairs`) VALUES
+(1, 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_DECEMBER_2012'),
+(2, 'CRESCENT_FARM_FLEET_REPAIRS_MONTHLY_COST_ANALYSIS_NOVEMBER_2012');
 
 -- --------------------------------------------------------
 
@@ -975,12 +991,19 @@ CREATE TABLE IF NOT EXISTS `repairs` (
   `month` varchar(255) DEFAULT NULL,
   `monthlycost` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `repairs`
 --
 
+INSERT INTO `repairs` (`id`, `fleetid`, `year`, `month`, `monthlycost`) VALUES
+(1, 1, '2012', 'NOVEMBER', '2000'),
+(2, 2, '2012', 'NOVEMBER', '0'),
+(3, 3, '2012', 'NOVEMBER', '0'),
+(4, 4, '2012', 'NOVEMBER', '0'),
+(5, 5, '2012', 'NOVEMBER', '0'),
+(6, 6, '2012', 'NOVEMBER', '0');
 
 -- --------------------------------------------------------
 
@@ -1164,12 +1187,15 @@ CREATE TABLE IF NOT EXISTS `totalmonthlyrepairscost` (
   `year` varchar(255) DEFAULT NULL,
   `cost` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `totalmonthlyrepairscost`
 --
 
+INSERT INTO `totalmonthlyrepairscost` (`id`, `month`, `year`, `cost`) VALUES
+(1, 'NOVEMBER', '2012', 2000),
+(2, 'NOVEMBER', '2012', 2000);
 
 -- --------------------------------------------------------
 

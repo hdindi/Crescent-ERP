@@ -19,7 +19,7 @@
 
 </aside>
 <div align="left"> 
- <?php  //echo @$pie_graph;
+ <?php  echo @$pie_graph;
  			?>
 </div>
 

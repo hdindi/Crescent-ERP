@@ -3,31 +3,74 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Home</title>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" 
 		type="text/css" media="all">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>css/screen.css" 
 		type="text/css" media="all">
-                
-                <link rel="stylesheet" href="<?php echo base_url(); ?>css/screen.css" 
-    type="text/css" media="all">
-		<script type="text/javascript" src="<?php echo base_url()."javascripts/jquery-1.8.2.js"?>"></script>
-		<script type="text/javascript" charset="utf-8" src="<?php echo base_url()."javascripts/datatables/media/js/jquery.dataTables.js"?>"></script>
-		<link rel="stylesheet" href="<?php echo base_url(); ?>javascripts/datatables/media/css/jquery.dataTables.css" type="text/css" rel="stylesheet"/>
-		<link rel="stylesheet" href="<?php echo base_url(); ?>javascripts/datatables/media/css/jquery.dataTables.css" 
-		type="text/css" media="all">
 
-	<script>
 
-	$(document).ready(function(){
-    $('#farms').dataTable();
-		} );
-	</script>
 
-	<script type="text/javascript" src="<?php echo base_url(); ?>jaascripts/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>CRESCENT ENTRPRISE SYSTEM</title>
+        <link rel="stylesheet" href="css/screen.css">
+        <style type="text/css">
+ #slideshow { 
+    margin-left: 5px auto; 
+    position: relative; 
+    width: 230px; 
+    height: 200px; 
+    padding: 10px; 
+  
+}
 
-                	<script type="text/javascript">
+#slideshow > div { 
+    position: absolute; 
+    top: 10px; 
+    left: 10px; 
+    right: 10px; 
+    bottom: 10px; 
+}
+.data{
+margin-top:210px;
+}
+h4.logo1{
+float-right:870px;
+}
+
+
+
+        </style>
+        <script>
+    $(document).ready(function(){
+    $(function() {
+        $( "#dateofcontract" ).datepicker({
+           dateFormat: 'mm-dd-yy'
+        });
+    });
+  });
+    //$('.date').datePicker({startDate: '01/01/2012'});
+    </script>
+        <script>
+    $("#slideshow > div:gt(0)").hide();
+
+setInterval(function() { 
+  $('#slideshow > div:first')
+    .fadeOut(1500)
+    .next()
+    .fadeIn(1000)
+    .end()
+    .appendTo('#slideshow');
+},  3000);
+        </script>
+
+        <script type="text/javascript" src="<?php echo base_url(); ?>javascripts/jquery.min.js"></script>
+  <script type="text/javascript">
   $(document).ready(function(){
-	$('#f_city, #f_city_label').hide();
+  $('#f_city, #f_city_label').hide();
   
 $('#f_state').change(function(){
     var state_id = $('#f_state').val();
@@ -46,7 +89,7 @@ $('#f_state').change(function(){
                    {
                     var opt = $('<option />'); // here we're creating a new select option for each group
                      opt.val(city.id);
-                    opt.text(city.farmname);
+                    opt.text(city.cityname);
                     $('#f_city').append(opt); 
                 });
                } //end success
@@ -57,15 +100,7 @@ $('#f_state').change(function(){
     }//end if
 }); //end change
 });
-	</script>
-                
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>CRESCENT ENTERPRISE SYSTEM</title>
-      
-        
-    
-
+  </script>
         
   </head>
     <header>      
@@ -97,45 +132,10 @@ $('#f_state').change(function(){
        <p>     
        
        
-                 
-   
-<div> <table id='farms'style='color:black;' >
-	<thead style='color:black;'>
-
-<th style='color:black;'>Id</th>
-<th style='color:black;'>Plot Number</th>
-<th style='color:black;'>Farm Name</th>
-<th style='color:black;'>Crop</th>
-<th style='color:black;'>Field Description</th>
-<th style='color:black;'>Leasor Name </th>
-
-
-	</thead >
-	<tbody style='color:black;' >
-
-<?php
-foreach($query as $row){
-	?>
-	<tr>
-	<td><span style='color:black;'><?php echo $row->id ?></span></td>
-	<td><span style='color:black;'><?php echo $row->name ?></span></td>
-	<td><span style='color:black;'><?php echo $row->acre ?></span></td>
-	<td><span style='color:black;'><?php echo $row->zone ?></span></td>
-	<td> <span style='color:black;'><?php echo $row->dateofcontract ?></span></td>
-	<td><span style='color:black;'><?php echo $row->leasorname ?></span></td>
+           <?php foreach ($dailyrevenues as $value): ?>
+	<ul><li><a name="dailyrevenues" href="<?php echo base_url().'dailyrevenue/do_upload/'.$value->filename;?>"><?php echo $value->filename;?></a></li></ul>
 	
-
-	</tr>
-<?php 
-}
-?>
-</tbody>
-</table>
-<br> <br>
-<a href='toExcelAll'><span style='color:green;'>Export All Data</span></a>
-</div>
-
-
+<?php endforeach?>
        </p>
 
 </fieldset>  
@@ -149,7 +149,11 @@ foreach($query as $row){
   
       </fieldset>
          <p>
-    
+      <?php echo form_submit('submit','Submit'); ?>
+        </p>
+      <?php echo form_close(); ?>
+
+  
   
 </div>
 
