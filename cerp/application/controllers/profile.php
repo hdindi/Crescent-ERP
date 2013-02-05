@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 class Profile extends Controller {
 
 	function Profile()

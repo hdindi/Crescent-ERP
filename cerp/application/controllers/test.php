@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class Test extends CI_Controller {
 	
 	function index() {

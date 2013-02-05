@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 class Fleetrepairs extends CI_Controller{
 	function __construct(){

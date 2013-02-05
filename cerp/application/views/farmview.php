@@ -77,9 +77,9 @@ $('#f_state').change(function(){
              <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li><?php echo anchor('farming/landregistration',' Land Registration '); ?></li>
-        <li><?php echo anchor('farming/weeding',' Weeding '); ?></li>
-        <li><?php echo anchor('farming/harvesting',' Harvesting '); ?></li>
+        <li><?php echo anchor('landregistration',' Land Registration '); ?></li>
+        <li><?php echo anchor('weeding',' Weeding '); ?></li>
+        <li><?php echo anchor('harvesting',' Harvesting '); ?></li>
         <li><?php echo anchor('farming/getallfarms','View Leased Farms'); ?></li>
         
       </ul>
@@ -104,7 +104,7 @@ $('#f_state').change(function(){
 
 <th style='color:black;'>Id</th>
 <th style='color:black;'>Plot Number</th>
-<th style='color:black;'>Farm Name</th>
+<th style='color:black;'> Acres </th>
 <th style='color:black;'>Crop</th>
 <th style='color:black;'>Field Description</th>
 <th style='color:black;'>Leasor Name </th>

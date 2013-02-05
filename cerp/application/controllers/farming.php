@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class Farming extends CI_Controller {
 
 	public function __construct() {
@@ -133,12 +134,12 @@ class Farming extends CI_Controller {
 	}
 
 	function landregistration(){
-    $data['query']=
-  $this->filterzones();
+    /*$data['query']=
+  $this->filterzones();*/
 
-		$this->load->view('landregistration_form',$data);
+		$this->load->view('landregistration_form');
 	}
-  function filterzones(){
+ /* function filterzones(){
     //$zonename = $this->input->post('f_state');
     $zoneid = $this->getzones();
    // $this->load->database();
@@ -156,8 +157,8 @@ class Farming extends CI_Controller {
 
         //$query = $this->db->get('farm');
 
-  }
-  public function getzones(){
+  }*/
+ /* public function getzones(){
     $zonename = $this->input->post('f_state');
     $this->db->select('id');
     $this->db->from('zone');
@@ -171,7 +172,7 @@ class Farming extends CI_Controller {
       
     }
 
-  }
+  }*/
 
   function toExcelAll() {
 $query['data1'] = $this->ToExcelAll1();

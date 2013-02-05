@@ -1,5 +1,6 @@
 <html>
 <?php
+error_reporting(0);
 foreach($farms as $farm):
 echo $farm;
 endforeach;

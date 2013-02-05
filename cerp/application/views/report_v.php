@@ -112,9 +112,9 @@ $('#f_state').change(function(){
              <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li><?php echo anchor('farming/landregistration',' Land Registration '); ?></li>
-        <li><?php echo anchor('farming/weeding',' Weeding '); ?></li>
-        <li><?php echo anchor('farming/harvesting',' Harvesting '); ?></li>
+        <li><?php echo anchor('landregistration',' Land Registration '); ?></li>
+        <li><?php echo anchor('weeding',' Weeding '); ?></li>
+        <li><?php echo anchor('harvesting',' Harvesting '); ?></li>
         <li><?php echo anchor('report','View  Perfrmance Reports'); ?></li>
         
       </ul>

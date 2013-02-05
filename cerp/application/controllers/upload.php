@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 class Upload extends CI_Controller {
 
 	function __construct()

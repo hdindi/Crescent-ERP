@@ -1,6 +1,6 @@
 
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+error_reporting(0);
 class Logina extends CI_Controller {
 
  function __construct()

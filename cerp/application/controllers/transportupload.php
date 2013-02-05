@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 session_start();
 class Transportupload extends CI_Controller{
 	private $_variable = "";

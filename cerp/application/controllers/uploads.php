@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 session_start();
 class Uploads extends CI_Controller{
 	private $_variable = "";
@@ -66,11 +66,13 @@ return $data1;
 		$row_id = $query->result();
 			foreach ($query->result() as $row) {
 				$row_id = $row->id;
+                                
 				echo $row_id;
 			}
 		}
 	$farm_value = $row_id;
 	$this->db->select('cyclename');
+        $this->db->select('monthofplantation');
 		$this->db->where('farmid', $farm_value);
 		$query = $this->db->get('cycle');
 		if($query->num_rows()>0){

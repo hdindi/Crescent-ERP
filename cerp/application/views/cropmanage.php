@@ -3,7 +3,42 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Home</title>
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>fancyapps/source/jquery.fancybox.css" type="text/css" media="screen" />
+        
+        
+        
+                <!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="<?php echo base_url(); ?>fancyapps/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>fancyapps/source/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo base_url(); ?>fancyapps/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>fancyapps/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo base_url(); ?>fancyapps/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>fancyapps/source/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
+
+<link rel="stylesheet" href="<?php echo base_url(); ?>fancyapps/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo base_url(); ?>fancyapps/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+
+<script type="text/javascript" href="<?php echo base_url(); ?>fancyapps/source/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" href="<?php echo base_url(); ?>fancyapps/source/jquery.fancybox.js"></script>
+     <script type="text/javascript">
+	$(document).ready(function() {
+                //$('.types').hide();
+		$("a#link1").fancybox();
+	});
+</script>
+        
+        
+        
+	
 	<link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" 
 		type="text/css" media="all">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>css/screen.css" 
@@ -34,6 +69,10 @@ margin-top:210px;
 h4.logo1{
 float-right:870px;
 }
+.types{
+    display: none;
+}
+
 
 
 
@@ -49,7 +88,13 @@ setInterval(function() {
     .end()
     .appendTo('#slideshow');
 },  3000);
+
         </script>
+                
+        
+       
+        
+       
         
   </head>
     <header>      
@@ -61,9 +106,11 @@ setInterval(function() {
                  <nav>
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li><?php echo anchor('farming/landregistration',' Land Registration '); ?></li>
-        <li><?php echo anchor('farming/transport',' Transport Services '); ?></li>
-        <li><?php echo anchor('farming/reports',' View Reports '); ?></li>
+        <li><a class="link1" id="link1"  href="#types">Land Registration</a></li>
+        
+        
+        <li><?php echo anchor('transport',' Transport Services '); ?></li>
+        <li><?php echo anchor('report',' View Reports '); ?></li>
         <li><?php echo anchor('farming/getallfarms','View Leased Farms'); ?></li>
         
       </ul>
@@ -71,7 +118,7 @@ setInterval(function() {
 </nav>
 <div class="clear"></div>
         </header>
-
+  <div class="types" id="types"> Do you want ot register a new Land or an Existing land? <ul><li><?php echo anchor('farming/landregistration',' Register a New Land!'); ?></li><li><?php echo anchor('farming/newfarmingactivity',' Use an Existing Registered Land!'); ?></li></ul></div>
 	
  <div id="container">
  
@@ -87,6 +134,7 @@ setInterval(function() {
 		<h2 id="landregistration" name="landregistration" class="landregistration"><?php echo anchor('landregistration','Land Registration'); ?></h2>
 		<h2><?php echo anchor('plots','File Uploads'); ?></h2>
 		<h2><?php echo anchor('farming/getallfarms','View Leased Farms'); ?></h2>
+                 <a href="large_image.jpg" class="fancybox" title="Sample title"><img src="small_image.jpg" /></a>
     
 	<?php else: ?>
 	<h2>Login/Register</h2>

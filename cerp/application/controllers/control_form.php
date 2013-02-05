@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class Control_form extends CI_Controller {
 	public function __construct() {
 		parent::__construct();

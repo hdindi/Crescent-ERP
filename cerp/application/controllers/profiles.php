@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 class Profiles extends CI_Controller {
 
 	function Profiles()

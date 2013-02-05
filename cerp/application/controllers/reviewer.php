@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class Reviewer extends CI_Controller {
 
     function __construct() {

@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class Doctrine_Tools extends CI_Controller {
 
 	function create_tables() {

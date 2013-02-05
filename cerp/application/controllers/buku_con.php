@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 class Buku_con extends CI_Controller {
 public function Buku_con() {
 parent::__construct();
